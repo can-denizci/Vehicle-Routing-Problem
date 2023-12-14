@@ -10,7 +10,7 @@ import numpy as np
 
 n = 73 # 72 number of service stop
 m = 10 # number of service
-cap = 25 #capacity
+cap = 25 #capacity of a service bus
 
 visited = np.zeros((n))
 routes = np.zeros((m, n))
@@ -25,7 +25,7 @@ def vehicle_location():
         print(i + 1,".vehicle is at the ",int(routes[i][int(r_indis[i])]) + 1,".stop!")     
          
 def starting_points():
-
+# Manually determining the starting points of the vehicles
     routes[0][0] = 0  
     number_of_pinvh[0] += number_of_people[0]
     routes[1][0] = 3  
@@ -61,7 +61,8 @@ def starting_points():
     visited[67] = 1
     visited[7] = 1
     visited[72] = 1
-    
+
+# Reading the input file
 file_directory = "/Users/candenizci/Downloads/routedataset.txt"
 with open(file_directory, "r") as file:
     dosya = file.readlines()   
@@ -81,6 +82,7 @@ starting_points()
 next_point = 0 
 vh = 0
 
+# Determining the routes of the services
 stop = True
 while stop:
     
@@ -114,17 +116,20 @@ n1people = 0
 for i in range(n):
     n1people += number_of_people[i]
 
+# Adding the target point to the end of all routes.
 for i in range(m):
     r_indis[i] = r_indis[i] + 1
     routes[i][int(r_indis[i])] = 72
-    
+
+#  Calculating the distances to be travelled
 totalcost = 0
 for i in range(m):
     cost[i] = 0
     for j in range(int(r_indis[i])):
         cost[i] = cost[i] + graph[int(routes[i][j])][int(routes[i][j+1])]
     totalcost = totalcost + cost[i]
-    
+
+# Printing the routes
 print("\n Routes:")
 for i in range(m):
     print(i + 1,". vehicle")
