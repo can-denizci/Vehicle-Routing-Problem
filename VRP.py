@@ -12,6 +12,7 @@ n = 73 # 72 number of service stop
 m = 10 # number of service
 cap = 25 #capacity of a service bus
 
+# initializing variables
 visited = np.zeros((n))
 routes = np.zeros((m, n))
 r_indis = np.zeros((m))
@@ -108,15 +109,7 @@ while stop:
     if temp == n: 
         stop = False
 
-npeople = 0
-for i in range(m):
-    npeople += number_of_pinvh[i]
-    
-n1people = 0
-for i in range(n):
-    n1people += number_of_people[i]
-
-# Adding the target point to the end of all routes.
+# Adding the target point to the end of all routes
 for i in range(m):
     r_indis[i] = r_indis[i] + 1
     routes[i][int(r_indis[i])] = 72
